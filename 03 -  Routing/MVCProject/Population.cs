@@ -36,7 +36,7 @@ namespace MVCProject
                 }
                 if (!string.IsNullOrWhiteSpace(population))
                 {
-                    await context.Response.WriteAsync($"<h1>City: {city}, Population: {population}</h1>");
+                    await context.Response.WriteAsync($"City: {city}, Population: {population}");
                     return;
                 }
             }
@@ -61,7 +61,7 @@ namespace MVCProject
                     break;
             }
             if (!string.IsNullOrWhiteSpace(population))
-                await context.Response.WriteAsync($"<h1>City: {city}, Population: {population}</h1>");
+                await context.Response.WriteAsync($"City: {city}, Population: {population}");
             else 
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
         }
@@ -106,7 +106,7 @@ namespace MVCProject
                 }
                 if (!string.IsNullOrWhiteSpace(capital))
                 {
-                    await context.Response.WriteAsync($"<h1>{capital} is the capital of {country}</h1>");
+                    await context.Response.WriteAsync($"{capital} is the capital of {country}");
                     return;
                 }
             }
@@ -134,7 +134,7 @@ namespace MVCProject
             }
 
             if (!string.IsNullOrWhiteSpace(capital))
-                await context.Response.WriteAsync($"<h1>{capital} is the capital of {country}</h1>");
+                await context.Response.WriteAsync($"{capital} is the capital of {country}");
             else
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
         }

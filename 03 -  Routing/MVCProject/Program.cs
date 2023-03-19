@@ -16,6 +16,17 @@ app.UseMiddleware<Capital>();
 //Example of Built in Routing - 2
 app.UseRouting();
 
+//Example of getting endpoint data after endpoint selectioon - 19
+//app.Use(async (context, next) =>
+//{
+//    Endpoint endp = context.GetEndpoint();
+//    if (endp is not null)
+//        await context.Response.WriteAsync($"{endp.DisplayName} endpoint has been selected\n");
+//    else
+//        await context.Response.WriteAsync($"No endpoint has been selected\n");
+//    await next();
+//});
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGet("routing", async context =>
