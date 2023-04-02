@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "About";
+}
+
+<h1>List of currently added products</h1>
+<div class="Products">
+@*@foreach(var p in Model)
+{
+    <div class="SingleProduct">
+        <p>Id: @p.Id</p>
+        <p>Name: @p.Name</p>
+        <p>Price: @p.Price</p>
+        <p>DateAdded: @p.DateAdded</p>
+        <p>Description: @p.Description</p>
+        <br />
+    </div>
+}
+</div>*@
+    @*@foreach (var p in ViewData["ProductsList"] as IEnumerable<Product>)*@
+    @*@foreach (var p in ViewData["ProductsMockData"] as IEnumerable<Product>)*@
+    @foreach (var p in ViewBag.Products)
+    {
+        <div class="SingleProduct">
+            <p>Id: @p.Id</p>
+            <p>Name: @p.Name</p>
+            <p>Price: @p.Price</p>
+            <p>DateAdded: @p.DateAdded</p>
+            <p>Description: @p.Description</p>
+            <br />
+        </div>
+    }
+</div>

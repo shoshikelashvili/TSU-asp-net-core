@@ -1,0 +1,86 @@
+﻿@model Product
+
+<form action="AddProduct" method="post">
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td><input type="number" name="Id" /></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" name="Name" /></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="number" name="Price" /></td>
+        </tr>
+        <tr>
+            <td>DateAdded:</td>
+            <td><input type="datetime" name="DateAdded" /></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" name="Description" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+</form>
+<br />
+
+
+@using (Html.BeginForm("AddProduct", "Home", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td>@Html.TextBoxFor(m => m.Id)</td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>@Html.TextBoxFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td>@Html.TextBoxFor(m => m.Price)</td>
+        </tr>
+        <tr>
+            <td>DateAdded:</td>
+            <td>@Html.TextBoxFor(m => m.DateAdded)</td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>@Html.TextBoxFor(m => m.Description)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+}
+<br />
+
+<form asp-action="AddProduct" method="post" class="m-2">
+    @*<div asp-validation-summary="All"></div>*@
+    <div class="form-group">
+        <label asp-for="Id" class="form-label">Product Id:</label>
+        <input asp-for="Id" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="form-label">Product Name:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price" class="form-label">Product Price:</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateAdded" class="form-label">Product Date:</label>
+        <input asp-for="DateAdded" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="form-label">Product Description:</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit Data</button>
+</form>

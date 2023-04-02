@@ -1,0 +1,8 @@
+﻿.Products{
+    display:flex;
+}
+
+.SingleProduct{
+    padding:2rem;
+}
+
