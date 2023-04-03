@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCProject.Models;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -79,8 +80,13 @@ namespace MVCProject.Controllers
             return Ok($"id = {id}, deleted = {deleted}");
         }
 
-        //public IActionResult AddProduct(int id, string Name, DateTime DateAdded, string Description, decimal Price)
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public IActionResult AddProduct(int id,string Name, DateTime DateAdded,/* [FromQuery]*/ string Description, decimal Price)
         //{
+        //    if (!ModelState.IsValid)
+        //        return Json("Model state is invalid");
+
         //    var productData = new Product()
         //    {
         //        Id = id,
@@ -96,9 +102,28 @@ namespace MVCProject.Controllers
         [HttpPost]
         public IActionResult AddProduct(Product productData)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             return Json($"id = {productData.Id}, name = {productData.Name}, date = {productData.DateAdded}, desc =  {productData.Description}, price = {productData.Price}");
         }
 
+        //Example of Source attributes explicitely stated
+        //[HttpPost]
+        //public IActionResult AddProduct([FromBody] Product productData, [FromQuery] string testString)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return Json("Model state is invalid");
+
+        //    return Json($"id = {productData.Id}, name = {productData.Name}, date = {productData.DateAdded}, desc =  {productData.Description}, price = {productData.Price}");
+        //}
+        [Route("Home/Attribute")]
+        public IActionResult TestLongName()
+        {
+            return Ok("Attribute routing");
+        }
 
 
         [NonAction]

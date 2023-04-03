@@ -54,20 +54,20 @@
             <td>@Html.TextBoxFor(m => m.Description)</td>
         </tr>
         <tr>
-            <td><input type="submit" value="Submit Form" /></td>
+            <td><input type="submit" value="Submit Form2" /></td>
         </tr>
     </table>
 }
 <br />
 
 <form asp-action="AddProduct" method="post" class="m-2">
-    @*<div asp-validation-summary="All"></div>*@
+    <div asp-validation-summary="All"></div>
     <div class="form-group">
         <label asp-for="Id" class="form-label">Product Id:</label>
         <input asp-for="Id" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Name" class="form-label">Product Name:</label>
+        <label asp-for="Name" data-val="true" class="form-label">Product Name:</label>
         <input asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
@@ -82,5 +82,5 @@
         <label asp-for="Description" class="form-label">Product Description:</label>
         <input asp-for="Description" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Submit Data</button>
+    <input type="submit" class="btn btn-primary mt-3" name="submit">
 </form>
