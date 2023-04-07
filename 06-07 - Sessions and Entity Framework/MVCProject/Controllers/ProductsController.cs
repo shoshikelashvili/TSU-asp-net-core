@@ -99,5 +99,17 @@ namespace MVCProject.Controllers
             HttpContext.Response.Cookies.Delete("cookie1");
             return Ok();
         }
+
+        public IActionResult GetSessionValues()
+        {
+            var test = HttpContext.Session.GetString("session1");
+            return Ok(test);
+        }
+
+        public IActionResult SetSession()
+        {
+            HttpContext.Session.SetString("session1", "value1");
+            return Ok();
+        }
     }
 }
