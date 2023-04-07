@@ -12,7 +12,23 @@ builder.Services.AddDbContext<StoreDbContext>(opts =>
 });
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 
+builder.Services.Configure<CookiePolicyOptions>(opts =>
+{
+    opts.CheckConsentNeeded = context => true;
+});
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(opts =>
+{
+    opts.IdleTimeout = TimeSpan.FromMinutes(30);
+    opts.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
+
+app.UseCookiePolicy();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -29,6 +45,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-SeedData.AddInitialData(app);
+//SeedData.AddInitialData(app);
 
 app.Run();

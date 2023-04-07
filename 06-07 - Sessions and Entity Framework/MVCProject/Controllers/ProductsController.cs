@@ -76,5 +76,28 @@ namespace MVCProject.Controllers
         {
             return View("ListProducts", _storeRepository.ProductsCheaperThan400Incorrect());
         }
+
+        public IActionResult GetCookies()
+        {
+            var cookiesText = "";
+            foreach (var cookie in HttpContext.Request.Cookies)
+                cookiesText += $"Key: {cookie.Key}, Value: {cookie.Value}\n"; 
+
+            return Ok(cookiesText);
+        }
+
+        public IActionResult AddCookiesToResponse()
+        {
+            HttpContext.Response.Cookies.Append("cookie1", "value1");
+            HttpContext.Response.Cookies.Append("cookie2", "value2");
+            HttpContext.Response.Cookies.Append("cookie3", "value3", new CookieOptions { IsEssential = true});
+            return Ok();
+        }
+
+        public IActionResult RemoveCookiesFromResponse()
+        {
+            HttpContext.Response.Cookies.Delete("cookie1");
+            return Ok();
+        }
     }
 }
