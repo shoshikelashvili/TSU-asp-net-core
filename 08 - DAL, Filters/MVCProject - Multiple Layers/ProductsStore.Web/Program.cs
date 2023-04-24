@@ -1,3 +1,4 @@
+using Composition;
 using Microsoft.EntityFrameworkCore;
 using ProductsStore.Business.Services;
 using ProductsStore.DAL.Context;
@@ -8,13 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<StoreDbContext>(opts =>
-{
-    opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProductsStoreConnection"], b => b.MigrationsAssembly("ProductsStore.Web"));
-});
-
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ProductService>();
+CompositionRoot.InjectDependencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
 ﻿using ProductsStore.DAL.Context;
-using ProductsStore.DAL.Models;
+using ProductsStore.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

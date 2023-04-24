@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductsStore.DAL.Models;
+using ProductsStore.Shared.Models;
 using System.Collections.Generic;
 
 namespace ProductsStore.DAL.Context

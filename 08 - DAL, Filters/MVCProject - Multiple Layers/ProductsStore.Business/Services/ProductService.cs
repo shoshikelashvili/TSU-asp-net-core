@@ -1,4 +1,4 @@
-﻿using ProductsStore.DAL.Models;
+﻿using ProductsStore.Shared.Models;
 using ProductsStore.DAL.Repositories;
 
 namespace ProductsStore.Business.Services

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductsStore.DAL.Models
+namespace ProductsStore.Shared.Models
 {
     public class Product
     {
