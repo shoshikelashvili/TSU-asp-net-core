@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MVCProject.Filters;
 using MVCProject.Migrations;
 using MVCProject.Repository;
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<StoreDbContext>(opts =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IHistoryRepository, HistoryRepository>();
 builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<CustomActionFilter>();
 
 builder.Services.Configure<CookiePolicyOptions>(opts =>
 {

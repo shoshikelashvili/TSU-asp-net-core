@@ -1,22 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVCProject.Filters;
 using MVCProject.Models;
 using MVCProject.Repository;
 
 namespace MVCProject.Controllers
 {
+    [ServiceFilter(typeof(CustomActionFilter))]
     public class ProductsController : Controller
     {
         private IProductRepository _storeRepository;
         private IHistoryRepository _historyRepository;
         private UnitOfWork _unitOfWork;
+        private IGenericRepository<Product> _genericProductRepo;
 
         public int PageSize = 2;
-        public ProductsController(IProductRepository storeRepository, IHistoryRepository historyRepository, UnitOfWork unitOfWork)
+        public ProductsController(IProductRepository storeRepository, IHistoryRepository historyRepository, UnitOfWork unitOfWork, IGenericRepository<Product> genericProductRepo)
         {
             _historyRepository = historyRepository;
             _storeRepository = storeRepository;
             _unitOfWork = unitOfWork;
+            _genericProductRepo = genericProductRepo;
         }
+
+        [ServiceFilter(typeof(CustomActionFilter))]
         public IActionResult ListProducts()
         {
             //var products = new List<Product>()
@@ -59,16 +65,17 @@ namespace MVCProject.Controllers
             try
             {
                 //Example where Transactive nature is not respected 
-                productData.Name = "TestVeryLongName";
-                _historyRepository.AddNewRecord(new History
-                {
-                    EntityName = productData.Name,
-                    Operation = "Add Product",
-                    OperationDate = DateTime.Now
-                });
+                //productData.Name = "TestVeryLongName";
+                //_historyRepository.AddNewRecord(new History
+                //{
+                //    EntityName = productData.Name,
+                //    Operation = "Add Product",
+                //    OperationDate = DateTime.Now
+                //});
 
-                _storeRepository.AddNewProduct(productData);
+                //_storeRepository.AddNewProduct(productData);
 
+                //Example with Unit Of Work in action
                 //_unitOfWork.HistoryRepo.AddNewRecord(new History
                 //{
                 //    EntityName = productData.Name,
@@ -77,6 +84,9 @@ namespace MVCProject.Controllers
                 //});
                 //_unitOfWork.ProductRepo.AddNewProduct(productData);
                 //_unitOfWork.Save();
+
+                //Example of Generic Interface
+                return Json(_genericProductRepo.GetAll());
             }
             catch(Exception ex)
             {
