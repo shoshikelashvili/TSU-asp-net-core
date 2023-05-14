@@ -110,6 +110,28 @@ namespace ElectronicsStore.DAL.Repositories
                 ServicePrice = 2,
                 ImageURL = "https://stormcomputershop.co.uk/wp-content/uploads/2021/09/IMG_3495-1.jpeg"
             },
+            new Product
+            {
+                Id = 10,
+                AddDate = DateTime.Now,
+                BasePrice = 10,
+                Description = "ლორემ იპსუმ ელიზბარ ცქმუტავდა ძვირფასთვლიანი",
+                IsAvailable = true,
+                Name = "Cooler",
+                ServicePrice = 2,
+                ImageURL = "https://www.newegg.com/insider/wp-content/uploads/2019/11/darkflash_dlm21_4-1024x576.jpg"
+            },
+            new Product
+            {
+                Id = 11,
+                AddDate = DateTime.Now,
+                BasePrice = 10,
+                Description = "ლორემ იპსუმ ელიზბარ ცქმუტავდა ძვირფასთვლიანი",
+                IsAvailable = true,
+                Name = "Case",
+                ServicePrice = 2,
+                ImageURL = "https://m.media-amazon.com/images/I/41xIJfkuWCL._SL160_.jpg"
+            },
         };
 
         public async Task<Product> GetByIdAsync(int id)
@@ -117,9 +139,12 @@ namespace ElectronicsStore.DAL.Repositories
             return await Task.FromResult(_productsList.Where(product => product.Id == id).First());
         }
 
-        public async Task<IQueryable<Product>> ListAsync()
+        public async Task<(IQueryable<Product>, int)> ListAsync(int limit, int page, string orderby)
         {
-            return await Task.FromResult(_productsList.AsQueryable());
+            var products = orderby == "DESC" ? _productsList.OrderByDescending(product => product.Id) : _productsList.OrderBy(product => product.Id);
+            var totalPages = Math.Ceiling((decimal)products.Count() / limit);
+
+            return (await Task.FromResult(products.Skip(limit * (page - 1)).Take(limit).AsQueryable()), (int)totalPages);
         }
     }
 }

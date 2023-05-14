@@ -11,12 +11,22 @@ namespace ElectronicsStore.Web.Controllers
         {
             _productsService = productsService;
         }
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(int page = 1)
         {
-            var products = await _productsService.ListProductsAsync();
+            var (products, totalPages) = await _productsService.ListProductsAsync(9, page);
             var productsViewModel = products.Select(product => new ProductViewModel(product));
+            ViewBag.Page = page;
+            ViewBag.TotalPages = totalPages;
 
             return View(productsViewModel);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await _productsService.GetProductByIdAsync(id);
+            var productViewModel = new ProductViewModel(product);
+
+            return View(productViewModel);
         }
     }
 }

@@ -16,8 +16,8 @@ namespace ElectronicsStore.Web.Controllers
         {
             ViewData["isHome"] = true;
 
-            var products = await _productsService.ListProductsAsync();
-            var productsViewModel = products.Take(6).Select(product => new ProductViewModel(product));
+            var (products, _) = await _productsService.ListProductsAsync(6);
+            var productsViewModel = products.Select(product => new ProductViewModel(product));
 
             return View(productsViewModel);
         }

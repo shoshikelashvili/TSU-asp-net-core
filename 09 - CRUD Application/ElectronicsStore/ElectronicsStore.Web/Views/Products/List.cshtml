@@ -18,6 +18,26 @@
                             <partial name="_ProductCard" model="product" />
                         }
                     </div>
+                    <div class="pagination" style="margin-bottom: 3rem; display: flex;">
+                        @if (ViewBag.Page > 1)
+                        {
+                            <a class="btn btn-lg btn-primary"
+                               role="button"
+                               style="background-color: #4843a3; max-width: 16rem; display: block; margin: auto; margin-left: 0;"
+                           asp-route-page="@(ViewBag.Page - 1)">
+                                წინა გვერდი
+                            </a>
+                        }
+                        @if (ViewBag.Page < ViewBag.TotalPages)
+                        {
+                            <a class="btn btn-lg btn-primary" 
+                               role="button" 
+                               style="background-color: #4843a3; max-width: 16rem; display: block; margin: auto; margin-right: 0; color:white"
+                               asp-route-page="@(ViewBag.Page + 1)">
+                                შემდეგი გვერდი
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

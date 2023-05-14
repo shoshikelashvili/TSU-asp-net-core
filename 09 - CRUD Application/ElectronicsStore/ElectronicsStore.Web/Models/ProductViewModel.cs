@@ -11,11 +11,14 @@ namespace ElectronicsStore.Web.Models
             Price = product.ServicePrice + product.BasePrice;
             ImageURL = product.ImageURL;
             IsAvailable = product.IsAvailable;
+            Description = product.Description;
         }
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string ImageURL { get; set; }
         public bool IsAvailable { get; set; }
+
+        public string Description { get; set; }
     }
 }

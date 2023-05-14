@@ -2,6 +2,8 @@ using ElectronicsStore.Business.Services;
 using ElectronicsStore.Business.Services.Contracts;
 using ElectronicsStore.DAL.Repositories;
 using ElectronicsStore.DAL.Repositories.Contracts;
+using ElectronicsStore.DAL.UnitOfWork;
+using ElectronicsStore.DAL.UnitOfWork.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductsRepository, MockProductsRepository>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IUnitOfWork, MockUnitOfWork>();
 
 var app = builder.Build();
 
