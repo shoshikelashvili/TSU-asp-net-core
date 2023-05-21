@@ -11,6 +11,7 @@ namespace ElectronicsStore.Business.Services
         {
             _unitOfWork = unitOfWork;
         }
+
         public async Task<Product> GetProductByIdAsync(int id)
         {
             var result = await _unitOfWork.ProductsRepository.GetByIdAsync(id);
@@ -21,6 +22,21 @@ namespace ElectronicsStore.Business.Services
         {
             var result = await _unitOfWork.ProductsRepository.ListAsync(limit, page, orderby);
             return (result.productsQueryable.ToList(), result.totalPages);
+        }
+
+        public async Task CreateProduct(Product product)
+        {
+            await _unitOfWork.ProductsRepository.CreateProduct(product);
+        }
+
+        public async Task DeleteProduct(int id)
+        {
+            await _unitOfWork.ProductsRepository.DeleteProduct(id);
+        }
+
+        public async Task EditProduct(Product product)
+        {
+            await _unitOfWork.ProductsRepository.EditProduct(product);
         }
     }
 }

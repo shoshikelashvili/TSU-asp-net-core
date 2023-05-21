@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IProductsRepository, MockProductsRepository>();
+builder.Services.AddSingleton<IProductsRepository, MockProductsRepository>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<IUnitOfWork, MockUnitOfWork>();
 

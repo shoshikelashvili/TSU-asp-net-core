@@ -1,0 +1,46 @@
+﻿@model Product
+<div class="edit-products" style="padding: 2rem;">
+    <form asp-action="Edit" method="post" class="m-2" >
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="Id" class="form-label">Product Id:</label>
+            <input asp-for="Id" class="form-control" value="@Model.Id"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" data-val="true" class="form-label">Product Name:</label>
+            <input asp-for="Name" class="form-control" value="@Model.Name" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BasePrice" class="form-label">Product Base Price:</label>
+            <input asp-for="BasePrice" class="form-control" value="@Model.BasePrice" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ServicePrice" class="form-label">Product Service Price:</label>
+            <input asp-for="ServicePrice" class="form-control" value="@Model.ServicePrice" />
+        </div>
+        <div class="form-group">
+            <label asp-for="IsAvailable" class="form-label">Product Availability</label>
+            @if(Model.IsAvailable)
+            {
+                <input asp-for="IsAvailable" checked class="form-check-input" type="checkbox" style="margin-left: 1rem;">
+            }
+            else
+            {
+                <input asp-for="IsAvailable" class="form-check-input" type="checkbox" style="margin-left: 1rem;">
+            }
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Product Description:</label>
+            <input asp-for="Description" class="form-control" value="@Model.Description" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Brand" class="form-label">Product Brand:</label>
+            <input asp-for="Brand" class="form-control" value="@Model.Brand" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageURL" class="form-label">Product ImageURL:</label>
+            <input asp-for="ImageURL" class="form-control" value="@Model.ImageURL" />
+        </div>
+        <input type="submit" class="btn btn-primary mt-3" name="submit">
+    </form>
+</div>

@@ -146,5 +146,33 @@ namespace ElectronicsStore.DAL.Repositories
 
             return (await Task.FromResult(products.Skip(limit * (page - 1)).Take(limit).AsQueryable()), (int)totalPages);
         }
+
+        public Task CreateProduct(Product product)
+        {
+            product.Id = _productsList.MaxBy(p => p.Id).Id + 1;
+            product.AddDate = DateTime.Now;
+            _productsList.Add(product);
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteProduct(int id)
+        {
+            _productsList.RemoveAll(product => product.Id == id);
+            return Task.CompletedTask;
+        }
+
+        public Task EditProduct(Product product)
+        {
+            var productToUpdate = _productsList.FirstOrDefault(p => p.Id == product.Id);
+            productToUpdate.ServicePrice = product.ServicePrice;
+            productToUpdate.BasePrice = product.BasePrice;
+            productToUpdate.Name = product.Name;
+            productToUpdate.Description = product.Description;
+            productToUpdate.Brand = product.Brand;
+            productToUpdate.ImageURL = product.ImageURL;
+            productToUpdate.IsAvailable = product.IsAvailable;
+            productToUpdate.ChangeDate = DateTime.Now;
+            return Task.CompletedTask;
+        }
     }
 }
