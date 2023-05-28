@@ -27,16 +27,19 @@ namespace ElectronicsStore.Business.Services
         public async Task CreateProduct(Product product)
         {
             await _unitOfWork.ProductsRepository.CreateProduct(product);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task DeleteProduct(int id)
         {
             await _unitOfWork.ProductsRepository.DeleteProduct(id);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task EditProduct(Product product)
         {
             await _unitOfWork.ProductsRepository.EditProduct(product);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

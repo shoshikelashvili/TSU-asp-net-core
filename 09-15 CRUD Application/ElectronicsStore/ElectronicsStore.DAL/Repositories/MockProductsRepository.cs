@@ -136,7 +136,7 @@ namespace ElectronicsStore.DAL.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await Task.FromResult(_productsList.Where(product => product.Id == id).First());
+            return await Task.FromResult(_productsList.First(product => product.Id == id));
         }
 
         public async Task<(IQueryable<Product>, int)> ListAsync(int limit, int page, string orderby)
