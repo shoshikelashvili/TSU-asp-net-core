@@ -1,9 +1,11 @@
 ﻿using ElectronicsStore.Business.Services.Contracts;
 using ElectronicsStore.Shared.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicsStore.Web.Controllers
 {
+	[Authorize]
     public class AdminController : Controller
     {
 		private readonly IProductsService _productsService;

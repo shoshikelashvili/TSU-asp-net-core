@@ -6,11 +6,15 @@ using ElectronicsStore.DAL.Repositories.Contracts;
 using ElectronicsStore.DAL.UnitOfWork;
 using ElectronicsStore.DAL.UnitOfWork.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using ElectronicsStore.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("IdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 //builder.Services.AddSingleton<IProductsRepository, MockProductsRepository>();
 builder.Services.AddScoped<IProductsRepository, EFProductsRepository>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
@@ -21,6 +25,14 @@ builder.Services.AddDbContext<StoreDbContext>(opts =>
 {
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProductsStoreConnection"], b => b.MigrationsAssembly("ElectronicsStore.Web"));
 });
+builder.Services.AddDbContext<IdentityDbContext>(opts =>
+{
+    opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProductsStoreConnection"]);
+});
+
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<IdentityDbContext>();
 
 var app = builder.Build();
 
@@ -31,7 +43,9 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+app.MapRazorPages();
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
