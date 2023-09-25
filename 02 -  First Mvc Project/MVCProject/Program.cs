@@ -16,7 +16,10 @@ var app = builder.Build();
 app.Use(async (context, next) =>
 {
     if (context.Request.Query.ContainsKey("custom"))
+    {
+        context.Response.ContentType = "text/html";
         await context.Response.WriteAsync("<h1>Lambda-based Middleware</h1> \n");
+    }
 
     await next();
 });
